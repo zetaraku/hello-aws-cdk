@@ -1,5 +1,6 @@
 import * as CDK from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { TableViewer } from 'cdk-dynamo-table-viewer';
 import { HitCounter } from './HitCounter';
 
 export class HelloAwsCdkStack extends CDK.Stack {
@@ -18,6 +19,12 @@ export class HelloAwsCdkStack extends CDK.Stack {
 
     const helloApi = new CDK.aws_apigateway.LambdaRestApi(this, 'HelloApi', {
       handler: hitCounter.handlerFunction,
+    });
+
+    const hitCounterTableViewer = new TableViewer(this, 'HitCounterTableViewer', {
+      title: 'Hit Counts',
+      table: hitCounter.counterTable,
+      sortBy: '-hits',
     });
   }
 }
