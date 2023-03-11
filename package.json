@@ -13,6 +13,7 @@
     "cdk:synth": "cdk synth"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.111",
     "@types/jest": "^29.4.0",
     "@types/node": "18.14.6",
     "aws-cdk": "2.68.0",
