@@ -1,5 +1,6 @@
 import * as CDK from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { HelloAwsCdkStackDeployStage } from './HelloAwsCdkStackDeployStage';
 
 export class HelloAwsCdkPipelineStack extends CDK.Stack {
   constructor(scope: Construct, id: string, props?: CDK.StackProps) {
@@ -20,5 +21,9 @@ export class HelloAwsCdkPipelineStack extends CDK.Stack {
         ],
       }),
     });
+
+    const deploymentStage = new HelloAwsCdkStackDeployStage(this, 'Deploy');
+
+    mainPipeline.addStage(deploymentStage);
   }
 }
