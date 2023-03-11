@@ -24,6 +24,27 @@ export class HelloAwsCdkPipelineStack extends CDK.Stack {
 
     const deploymentStage = new HelloAwsCdkStackDeployStage(this, 'Deploy');
 
-    mainPipeline.addStage(deploymentStage);
+    mainPipeline
+      .addStage(deploymentStage)
+      .addPost(
+        new CDK.pipelines.CodeBuildStep('TestHelloApiEndpoint', {
+          envFromCfnOutputs: {
+            ENDPOINT_URL: deploymentStage.stack.helloApiUrl,
+          },
+          commands: [
+            'curl -Ssf $ENDPOINT_URL',
+            'curl -Ssf $ENDPOINT_URL/hello',
+            'curl -Ssf $ENDPOINT_URL/test',
+          ],
+        }),
+        new CDK.pipelines.CodeBuildStep('TestHitCounterTableViewerEndpoint', {
+          envFromCfnOutputs: {
+            ENDPOINT_URL: deploymentStage.stack.hitCounterTableViewerUrl,
+          },
+          commands: [
+            'curl -Ssf $ENDPOINT_URL',
+          ],
+        }),
+      );
   }
 }
