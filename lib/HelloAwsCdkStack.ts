@@ -26,5 +26,13 @@ export class HelloAwsCdkStack extends CDK.Stack {
       table: hitCounter.counterTable,
       sortBy: '-hits',
     });
+
+    const helloApiUrl = new CDK.CfnOutput(this, 'HelloApiUrl', {
+      value: helloApi.url,
+    });
+
+    const hitCounterTableViewerUrl = new CDK.CfnOutput(this, 'HitCounterTableViewerUrl', {
+      value: hitCounterTableViewer.endpoint,
+    });
   }
 }
