@@ -4,6 +4,16 @@ import { TableViewer } from 'cdk-dynamo-table-viewer';
 import { HitCounter } from './HitCounter';
 
 export class HelloAwsCdkStack extends CDK.Stack {
+  /**
+   * The url of the hello api.
+   */
+  public readonly helloApiUrl: CDK.CfnOutput;
+
+  /**
+   * The url of the hit counter table viewer.
+   */
+  public readonly hitCounterTableViewerUrl: CDK.CfnOutput;
+
   constructor(scope: Construct, id: string, props?: CDK.StackProps) {
     super(scope, id, props);
 
@@ -34,5 +44,8 @@ export class HelloAwsCdkStack extends CDK.Stack {
     const hitCounterTableViewerUrl = new CDK.CfnOutput(this, 'HitCounterTableViewerUrl', {
       value: hitCounterTableViewer.endpoint,
     });
+
+    this.helloApiUrl = helloApiUrl;
+    this.hitCounterTableViewerUrl = hitCounterTableViewerUrl;
   }
 }
