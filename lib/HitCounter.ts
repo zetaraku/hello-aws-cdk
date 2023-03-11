@@ -7,6 +7,11 @@ export class HitCounter extends Construct {
    */
   public readonly handlerFunction: CDK.aws_lambda.Function;
 
+  /**
+   * The table that stores the hit counts for the `targetFunction`.
+   */
+  public readonly counterTable: CDK.aws_dynamodb.Table;
+
   constructor(scope: Construct, id: string, props: {
     /**
      * The function to be wrapped with hit counter.
@@ -42,5 +47,6 @@ export class HitCounter extends Construct {
     targetFunction.grantInvoke(handlerFunction);
 
     this.handlerFunction = handlerFunction;
+    this.counterTable = counterTable;
   }
 }
