@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk:deploy": "cdk deploy",
+    "cdk:deploy:stack": "cdk deploy HelloAwsCdkStack",
+    "cdk:deploy:pipeline": "cdk deploy HelloAwsCdkPipelineStack",
     "cdk:diff": "cdk diff",
     "cdk:synth": "cdk synth"
   },
