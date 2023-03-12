@@ -1,5 +1,6 @@
 import * as CDK from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { HitCounter } from './HitCounter';
 
 export class HelloAwsCdkStack extends CDK.Stack {
   constructor(scope: Construct, id: string, props?: CDK.StackProps) {
@@ -11,8 +12,12 @@ export class HelloAwsCdkStack extends CDK.Stack {
       handler: 'handler',
     });
 
+    const hitCounter = new HitCounter(this, 'HitCounter', {
+      targetFunction: helloFunction,
+    });
+
     const helloApi = new CDK.aws_apigateway.LambdaRestApi(this, 'HelloApi', {
-      handler: helloFunction,
+      handler: hitCounter.handlerFunction,
     });
   }
 }
