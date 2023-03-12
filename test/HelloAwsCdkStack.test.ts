@@ -8,4 +8,5 @@ test('HelloAwsCdkStack construct', () => {
 
   template.hasResource('AWS::Lambda::Function', {});
   template.hasResource('AWS::ApiGateway::RestApi', {});
+  template.hasResource('AWS::DynamoDB::Table', {});
 });
