@@ -10,5 +10,9 @@ export class HelloAwsCdkStack extends CDK.Stack {
       entry: 'lambda/hello.ts',
       handler: 'handler',
     });
+
+    const helloApi = new CDK.aws_apigateway.LambdaRestApi(this, 'HelloApi', {
+      handler: helloFunction,
+    });
   }
 }
