@@ -7,4 +7,5 @@ test('HelloAwsCdkStack construct', () => {
   const template = CDK.assertions.Template.fromStack(stack);
 
   template.hasResource('AWS::Lambda::Function', {});
+  template.hasResource('AWS::ApiGateway::RestApi', {});
 });
